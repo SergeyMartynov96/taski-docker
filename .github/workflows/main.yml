@@ -87,7 +87,7 @@ jobs:
             # Для каждого пересобранного образа 
             # устанавливаем тег latest, чтобы потом
             # на сервере и в docker-compose.yml не указывать версию
-            tags: sergomar/taski_backend:tagname
+            tags: sergomar/taski_backend:latest
 
 
   frontend_tests:
@@ -132,7 +132,7 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: sergomar/taski_frontend:tagname
+          tags: sergomar/taski_frontend:latest
 
 
   build_gateway_and_push_to_docker_hub:
@@ -154,7 +154,8 @@ jobs:
           context: ./gateway/
           push: true
           # Тут вместо username должен быть ваш логин на Docker Hub
-          tags: sergomar/taski_gateway:tagname
+          tags: sergomar/taski_gateway:latest
+
 
   deploy:
       runs-on: ubuntu-latest
@@ -198,5 +199,3 @@ jobs:
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
             sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
             sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
-
-

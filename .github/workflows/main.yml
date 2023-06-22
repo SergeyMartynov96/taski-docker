@@ -87,7 +87,7 @@ jobs:
             # Для каждого пересобранного образа 
             # устанавливаем тег latest, чтобы потом
             # на сервере и в docker-compose.yml не указывать версию
-            tags: sergomar/taski_backend:latest
+            tags: sergomar/taski_backend:tagname
 
 
   frontend_tests:
@@ -132,7 +132,7 @@ jobs:
         with:
           context: ./frontend/
           push: true
-          tags: sergomar/taski_frontend:latest
+          tags: sergomar/taski_frontend:tagname
 
 
   build_gateway_and_push_to_docker_hub:
@@ -154,7 +154,7 @@ jobs:
           context: ./gateway/
           push: true
           # Тут вместо username должен быть ваш логин на Docker Hub
-          tags: sergomar/taski_gateway:latest
+          tags: sergomar/taski_gateway:tagname
 
   deploy:
       runs-on: ubuntu-latest
